@@ -1,49 +1,35 @@
-`default_nettype none
-`timescale 1ns / 1ps
+`timescale 1ns/1ps
+module tb_mux4to1;
 
-/* This testbench just instantiates the module and makes some convenient wires
-   that can be driven / tested by the cocotb test.py.
-*/
-module tb ();
+reg  [3:0] d;
+reg  [1:0] s;
+wire y;
 
-  // Dump the signals to a FST file. You can view it with gtkwave or surfer.
-  initial begin
-    $dumpfile("tb.fst");
-    $dumpvars(0, tb);
-    #1;
-  end
+mux4to1 dut (
+    .d(d),
+    .s(s),
+    .y(y)
+);
 
-  // Wire up the inputs and outputs:
-  reg clk;
-  reg rst_n;
-  reg ena;
-  reg [7:0] ui_in;
-  reg [7:0] uio_in;
-  wire [7:0] uo_out;
-  wire [7:0] uio_out;
-  wire [7:0] uio_oe;
-`ifdef GL_TEST
-  wire VPWR = 1'b1;
-  wire VGND = 1'b0;
-`endif
+initial begin
+    d = 4'b1010;
 
-  // Replace tt_um_example with your module name:
-  tt_um_example user_project (
+    s = 2'b00; #10;
+    s = 2'b01; #10;
+    s = 2'b10; #10;
+    s = 2'b11; #10;
 
-      // Include power ports for the Gate Level test:
-`ifdef GL_TEST
-      .VPWR(VPWR),
-      .VGND(VGND),
-`endif
+    d = 4'b1101;
+    s = 2'b00; #10;
+    s = 2'b01; #10;
+    s = 2'b10; #10;
+    s = 2'b11; #10;
 
-      .ui_in  (ui_in),    // Dedicated inputs
-      .uo_out (uo_out),   // Dedicated outputs
-      .uio_in (uio_in),   // IOs: Input path
-      .uio_out(uio_out),  // IOs: Output path
-      .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)
-      .ena    (ena),      // enable - goes high when design is selected
-      .clk    (clk),      // clock
-      .rst_n  (rst_n)     // not reset
-  );
+    $finish;
+end
+
+initial begin
+    $monitor("time=%0t d=%b s=%b y=%b", $time, d, s, y);
+end
 
 endmodule
