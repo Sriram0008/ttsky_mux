@@ -1,9 +1,20 @@
-import subprocess
+import cocotb
+from cocotb.triggers import Timer
 
-cmd_compile = ["iverilog", "-o", "mux_sim", "mux4to1.v", "tb_mux4to1.v"]
-cmd_run = ["vvp", "mux_sim"]
+@cocotb.test()
+async def test_mux(dut):
+    dut.ena.value = 1
+    dut.rst_n.value = 1
+    dut.uio_in.value = 0
 
-subprocess.run(cmd_compile, check=True)
-subprocess.run(cmd_run, check=True)
+    patterns = [
+        (0b0001,0,1),
+        (0b0010,1,1),
+        (0b0100,2,1),
+        (0b1000,3,1),
+    ]
 
-print("Simulation completed successfully.")
+    for data, sel, expected in patterns:
+        dut.ui_in.value = data | (sel << 4)
+        await Timer(1, units='ns')
+        assert int(dut.uo_out.value & 1) == expected
