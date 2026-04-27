@@ -1,28 +1,36 @@
-yaml_version: 6
-
+# info.yaml
 project:
-  title: "4 to 1 Mux"
-  author: "Your Name"
-  discord: "yourname"
-  description: "TinyTapeout 4-to-1 multiplexer"
-  language: "Verilog"
-  clock_hz: 0
-  tiles: "1x1"
-  top_module: "tt_um_mux4to1"
+  wokwi_id: 0
+  top_module: tt_um_mux4to1
   source_files:
     - project.v
 
 pinout:
-  ui[0]: d0
-  ui[1]: d1
-  ui[2]: d2
-  ui[3]: d3
+  ui[0]: a0
+  ui[1]: a1
+  ui[2]: a2
+  ui[3]: a3
   ui[4]: s0
   ui[5]: s1
-  ui[6]: ""
-  ui[7]: ""
+  ui[6]: unused
+  ui[7]: unused
 
   uo[0]: y
-  uo[7:1]: ""
+  uo[1]: unused
+  uo[2]: unused
+  uo[3]: unused
+  uo[4]: unused
+  uo[5]: unused
+  uo[6]: unused
+  uo[7]: unused
 
-  uio[7:0]: ""
+  uio[0]: unused
+  uio[1]: unused
+  uio[2]: unused
+  uio[3]: unused
+  uio[4]: unused
+  uio[5]: unused
+  uio[6]: unused
+  uio[7]: unused
+
+yaml_version: 6
