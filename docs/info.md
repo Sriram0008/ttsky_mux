@@ -1,20 +1,17 @@
-<!---
+# 4-to-1 Multiplexer
 
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
+## Description
+A 4-to-1 multiplexer routes one of four input bits to a single output based on a 2-bit select signal.
 
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
+## Truth Table
+| s1 s0 | Output |
+|------|--------|
+| 00   | d0     |
+| 01   | d1     |
+| 10   | d2     |
+| 11   | d3     |
 
-## How it works
-
-Explain how your project works
-
-## How to test
-
-Explain how to use your project
-
-## External hardware
-
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+## Files
+- `mux4to1.v` : RTL design
+- `tb_mux4to1.v` : Testbench
+- `test.py` : Simulation helper script
