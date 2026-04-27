@@ -1,9 +1,28 @@
-name: 4_to_1_mux
-language: verilog
-module: mux4to1
-inputs:
-  - d[3:0]
-  - s[1:0]
-outputs:
-  - y
-description: 4-to-1 multiplexer selects one of four inputs using a 2-bit select line.
+yaml_version: 6
+
+project:
+  title: "4 to 1 Mux"
+  author: "Your Name"
+  discord: "yourname"
+  description: "TinyTapeout 4-to-1 multiplexer"
+  language: "Verilog"
+  clock_hz: 0
+  tiles: "1x1"
+  top_module: "tt_um_mux4to1"
+  source_files:
+    - project.v
+
+pinout:
+  ui[0]: d0
+  ui[1]: d1
+  ui[2]: d2
+  ui[3]: d3
+  ui[4]: s0
+  ui[5]: s1
+  ui[6]: ""
+  ui[7]: ""
+
+  uo[0]: y
+  uo[7:1]: ""
+
+  uio[7:0]: ""
